@@ -1,0 +1,17 @@
+<div class="jumbotron">
+    <div class="container" ng-controller="AuthController as vm">
+        <div ng-if="!vm.isLoggedIn()">
+            <h1>Welcome to <i>Contact Lists</i></h1>
+            <p><b>Contact Lists</b> is a site that lets you store contacts that you frequently use or don't ever want to forget!</p>
+            <p><a class="btn btn-primary btn-lg" href="#/register/" role="button">Register! &raquo;</a></p>
+        </div>
+
+        <div ng-if="vm.isLoggedIn()">
+            <h1>Welcome <i>{{ vm.$storage.username }}</i></h1>
+            <p>Looks like you're already logged in! Why don't you go and checkout your contacts?</p>
+            <p><a class="btn btn-primary btn-lg" href="#/contacts/" role="button">Check contacts! &raquo;</a></p>
+        </div>
+
+    </div>
+</div>
+

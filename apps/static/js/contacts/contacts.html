@@ -1,0 +1,156 @@
+<div class="page-header">
+    <center>
+        <h1 class="">Welcome {{ vm.username }}! Here are your Contacts</h1>
+    </center>
+</div>
+
+<div class="jumbotron">
+    <form class="form-inline" role="form">
+        How many results to display:
+        <input ng-model="quantity" class="form-control"/>
+        &nbsp;&nbsp;
+        Search:
+        <input ng-model="query" class="form-control" />
+    </form>
+    <br/>
+    <button type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#newContactModal">Add a contact</button>
+</div>
+
+<!-- Modal -->
+<div id="newContactModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Enter New Contact</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal">
+                    <div class="form-group" >
+                        <label for="name" class="col-sm-2 control-label">Name:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="newName" ng-model="vm.new.name">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email" class="col-sm-2 control-label">E-mail:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="newEmail" ng-model="vm.new.email">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone" class="col-sm-2 control-label">Phone:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="newPhone" ng-model="vm.new.phone">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="address" class="col-sm-2 control-label">Address:</label>
+                        <div class="col-sm-10">
+                            <textarea type="text" class="form-control" id="newAddress" ng-model="vm.new.address" rows="5">
+                            </textarea>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" ng-click="vm.newContact()">Submit</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="jumbotron">
+    <div class="container">
+        <table class="table table-responsive">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>E-mail</th>
+                    <th>Phone</th>
+                    <th>Address</th>
+                    <th>Operations</th>
+                </tr>
+            </thead>
+            <tr ng-repeat="contact in vm.contacts | orderBy:'-id' | limitTo:quantity | filter:query ">
+                <td>
+                    {{ contact.name }}
+                </td>
+                <td>
+                    {{ contact.email }}
+                </td>
+                <td>
+                    {{ contact.phone }}
+                </td>
+                <td>
+                    {{ contact.address }}
+                </td>
+                <td>
+                    <center>
+                        <button class="btn btn-default" title="Edit">
+                                <a href="" ng-click="vm.copyContact(contact)" data-toggle="modal" data-target="#updateContactModal">
+                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                </a>
+                        </button>
+                        &nbsp;&nbsp;
+                        <button class="btn btn-default" title="Delete">
+                            <a href="" ng-click="vm.deleteContact(contact)">
+                                <i class="fa fa-trash-o" aria-hidden="true"></i>
+                            </a>
+                        </button>
+                        
+                        
+                    </center>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<!-- Modal -->
+<div id="updateContactModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"><b>Update</b> Contact</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal">
+                    <div class="form-group" >
+                        <label for="name" class="col-sm-2 control-label">Name:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="updateName" ng-model="vm.edit.name" value="vm.edit.name">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email" class="col-sm-2 control-label">E-mail:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="updateEmail" ng-model="vm.edit.email" value="vm.edit.email">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone" class="col-sm-2 control-label">Phone:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="updatePhone" ng-model="vm.edit.phone" value="vm.edit.phone">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="address" class="col-sm-2 control-label">Address:</label>
+                        <div class="col-sm-10">
+                            <textarea type="text" class="form-control" id="upatedAddress" ng-model="vm.edit.address"
+                                      value="vm.edit.address" rows="5"></textarea>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" ng-click="vm.updateContact()">Update</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
