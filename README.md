@@ -18,11 +18,17 @@ Follow this guide: https://www.digitalocean.com/community/tutorials/how-to-use-p
 3. Then execute these commands from terminal.
 
 >virtualenv venv
+
 >source venv/bin/activate
+
 >pip install -U pip
+
 >pip install -r requirements.txt 
+
 >cd $DIR_PATH #your project directory
+
 >python3 manage.py migrate
+
 >python3 manage.py runserver
 
 4. Browse the site by this address: http://127.0.0.1:8000/
